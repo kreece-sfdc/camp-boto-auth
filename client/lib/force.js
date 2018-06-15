@@ -198,7 +198,7 @@ var force = (function () {
      * @param url - The oauthRedictURL called by Salesforce at the end of the OAuth workflow. Includes the access_token in the querystring
      */
     function oauthCallback(url) {
-        url = decodeURIComponent(url);
+        alert(url);
         // Parse the OAuth data received from Facebook
         var queryString,
             obj;
