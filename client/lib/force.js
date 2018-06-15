@@ -198,18 +198,17 @@ var force = (function () {
      * @param url - The oauthRedictURL called by Salesforce at the end of the OAuth workflow. Includes the access_token in the querystring
      */
     function oauthCallback(url) {
-        url = decodeURIComponent(url);
-        alert(url);
         // Parse the OAuth data received from Facebook
         var queryString,
             obj;
 
         if (url.indexOf("code=") > 0) {
-            queryString = url.substr(url.indexOf('code=') + 1);
-            alert(JSON.stringify(queryString));
+            queryString = url.substr(url.indexOf('?') + 1);
+            obj = parseQueryString(queryString);
+            oauth = obj;
 
             var loginWindowURL = loginURL + '/services/oauth2/token?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + queryString;
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code + '=='; // hack to re-add after parseQueryString stripped them out
 
             window.location = loginWindowURL;
 
