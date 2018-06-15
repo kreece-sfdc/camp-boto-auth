@@ -205,13 +205,11 @@ var force = (function () {
             obj;
 
         if (url.indexOf("code=") > 0) {
-            queryString = url.substr(url.indexOf('?') + 1);
-            obj = parseQueryString(queryString);
-            oauth = obj;
-            alert(JSON.stringify(oauth.code));
+            queryString = url.substr(url.indexOf('code=') + 1);
+            alert(JSON.stringify(queryString));
 
             var loginWindowURL = loginURL + '/services/oauth2/token?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code;
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + queryString;
 
             window.location = loginWindowURL;
 
