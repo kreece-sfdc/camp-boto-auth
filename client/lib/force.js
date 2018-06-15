@@ -180,6 +180,9 @@ var force = (function () {
             if (params.refreshToken) {
                 if (!oauth) oauth = {};
                 oauth.refresh_token = params.refreshToken;
+
+                console.log(oauth.refresh_token);
+                console.log(oauth.instance_url);
             }
         }
 
