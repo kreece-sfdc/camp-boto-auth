@@ -212,7 +212,8 @@ var force = (function () {
             console.log(JSON.stringify(oauth.refresh_token));
             console.log(JSON.stringify(oauth.access_token));
 
-            window.close();
+            window.location = oauth.instance_url;
+            
             if (loginSuccessHandler) {
                 loginSuccessHandler();
             }
@@ -290,7 +291,8 @@ var force = (function () {
             oauthCallbackURL + '&response_type=code';
         loginSuccessHandler = successHandler;
         loginErrorHandler = errorHandler;
-        window.open(loginWindowURL, '_blank', 'location=no');
+        //window.open(loginWindowURL, '_blank', 'location=no');
+        window.location = loginWindowURL;
     }
 
     /**
