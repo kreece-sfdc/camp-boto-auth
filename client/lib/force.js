@@ -182,8 +182,10 @@ var force = (function () {
                 oauth.refresh_token = params.refreshToken;
             }
 
-            console.log(oauth.refresh_token);
-            console.log(oauth.instance_url);
+            if(oauth != null) {
+                console.log(oauth.refresh_token);
+                console.log(oauth.instance_url);
+            }
         }
 
     }
