@@ -220,7 +220,7 @@ var force = (function () {
                 'client_id': appId
             },
 
-            url = loginURL + '/services/oauth2/token?' + toQueryString(params);
+            var authUrl = loginURL + '/services/oauth2/token?' + toQueryString(params);
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
@@ -242,10 +242,7 @@ var force = (function () {
                 }
             };
 
-            xhr.open('POST', url, true);
-            if (!oauthPlugin) {
-                xhr.setRequestHeader("Target-URL", loginURL);
-            }
+            xhr.open('POST', authUrl, true);
             xhr.send();
 
             if (loginSuccessHandler) {
