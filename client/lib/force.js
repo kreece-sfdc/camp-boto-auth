@@ -246,7 +246,7 @@ var force = (function () {
                 }
             };
 
-            xhr.open('POST', authUrl, true);
+            xhr.open('GET', authUrl, true);
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
@@ -327,7 +327,7 @@ var force = (function () {
         console.log('oauthCallbackURL: ' + oauthCallbackURL);
 
         var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&client_secret=' + secret + '&redirect_uri=' +
-            oauthCallbackURL + '&response_type=token';
+            oauthCallbackURL + '&response_type=code';
         loginSuccessHandler = successHandler;
         loginErrorHandler = errorHandler;
         //window.open(loginWindowURL, '_blank', 'location=no');
