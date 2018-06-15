@@ -211,6 +211,23 @@ var force = (function () {
             console.log(JSON.stringify(oauth.instance_url));
             console.log(JSON.stringify(oauth.refresh_token));
             console.log(JSON.stringify(oauth.access_token));
+
+            window.close();
+            if (loginSuccessHandler) {
+                loginSuccessHandler();
+            }
+        }
+        else if (url.indexOf("code=") > 0) {
+            queryString = url.substr(url.indexOf('#') + 1);
+            obj = parseQueryString(queryString);
+            oauth = obj;
+            console.log(JSON.stringify(oauth.code));
+
+            var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code;
+
+            window.location = loginWindowURL;
+
             if (loginSuccessHandler) {
                 loginSuccessHandler();
             }
@@ -269,7 +286,7 @@ var force = (function () {
         console.log('oauthCallbackURL: ' + oauthCallbackURL);
 
         var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&response_type=token';
+            oauthCallbackURL + '&response_type=code';
         loginSuccessHandler = successHandler;
         loginErrorHandler = errorHandler;
         window.open(loginWindowURL, '_blank', 'location=no');
