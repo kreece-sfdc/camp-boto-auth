@@ -245,6 +245,10 @@ var force = (function () {
 
             xhr.open('POST', authUrl, true);
             xhr.setRequestHeader("Target-URL", loginURL);
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+            xhr.setRequestHeader('Access-Control-Allow-Headers', ' Origin, Content-Type, X-Auth-Token');
+            xhr.setRequestHeader("Access-Control-Allow-Credentials","true");
             xhr.send();
 
             if (loginSuccessHandler) {
