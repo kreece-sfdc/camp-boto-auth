@@ -220,9 +220,7 @@ var force = (function () {
                 'client_id': appId
             },
 
-            url = oauthPlugin ? loginURL : proxyURL;
-
-            url = url + '/services/oauth2/token?' + toQueryString(params);
+            url = loginURL + '/services/oauth2/token?' + toQueryString(params);
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
