@@ -181,11 +181,6 @@ var force = (function () {
                 if (!oauth) oauth = {};
                 oauth.refresh_token = params.refreshToken;
             }
-
-            if(params) {
-                console.log(params.refreshToken);
-                console.log(params.instanceURL);
-            }
         }
 
     }
@@ -213,6 +208,7 @@ var force = (function () {
             obj = parseQueryString(queryString);
             oauth = obj;
             tokenStore.forceOAuth = JSON.stringify(oauth);
+            console.log(JSON.stringify(oauth));
             if (loginSuccessHandler) {
                 loginSuccessHandler();
             }
