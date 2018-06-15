@@ -244,6 +244,7 @@ var force = (function () {
             };
 
             xhr.open('POST', authUrl, true);
+            xhr.setRequestHeader("Target-URL", loginURL);
             xhr.send();
 
             if (loginSuccessHandler) {
