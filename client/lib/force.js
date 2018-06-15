@@ -204,7 +204,7 @@ var force = (function () {
             obj;
 
         if (url.indexOf("code=") > 0) {
-            queryString = url;//.substr(url.indexOf('#') + 1);
+            queryString = urlsubstr(url.indexOf('?') + 1);
             obj = parseQueryString(queryString);
             oauth = obj;
             alert(JSON.stringify(oauth));
