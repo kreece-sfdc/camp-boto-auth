@@ -12,6 +12,9 @@ var force = (function () {
     // The Connected App client Id. Default app id provided - Not for production use.
         appId = '3MVG9TSaZ8P6zP1ol1go1KwfWLpC89jcsBnJWrNpYhYIN8EVClK097Nb.d6BcCJn6bdmWwPGbJj3xL.mXe2Xa',
 
+    // app secret
+        secret = '5203823108494940256',
+
     // The force.com API version to use. Default can be overriden in login()
         apiVersion = 'v42.0',
 
@@ -323,7 +326,7 @@ var force = (function () {
         console.log('loginURL: ' + loginURL);
         console.log('oauthCallbackURL: ' + oauthCallbackURL);
 
-        var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
+        var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&client_secret=' + secret + '&redirect_uri=' +
             oauthCallbackURL + '&response_type=token';
         loginSuccessHandler = successHandler;
         loginErrorHandler = errorHandler;
