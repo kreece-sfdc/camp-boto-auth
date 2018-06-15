@@ -323,7 +323,7 @@ var force = (function () {
         console.log('oauthCallbackURL: ' + oauthCallbackURL);
 
         var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&response_type=code';
+            oauthCallbackURL + '&response_type=token';
         loginSuccessHandler = successHandler;
         loginErrorHandler = errorHandler;
         //window.open(loginWindowURL, '_blank', 'location=no');
