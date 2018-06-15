@@ -221,7 +221,8 @@ var force = (function () {
             params = {
                 'grant_type': 'authorization_code',
                 'code': oauth.code + '==',
-                'client_id': appId
+                'client_id': appId,
+                'client_secret': secret
             },
 
             authUrl = loginURL + '/services/oauth2/token?' + toQueryString(params);
@@ -246,10 +247,7 @@ var force = (function () {
                 }
             };
 
-            xhr.open('GET', authUrl, true);
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.open('POST', authUrl, true);
             xhr.send();
 
             if (loginSuccessHandler) {
