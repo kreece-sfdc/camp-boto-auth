@@ -207,10 +207,10 @@ var force = (function () {
             queryString = url.substr(url.indexOf('?') + 1);
             obj = parseQueryString(queryString);
             oauth = obj;
-            alert(JSON.stringify(oauth));
+            alert(JSON.stringify(oauth.code));
 
             var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth;
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code;
 
             window.location = loginWindowURL;
 
