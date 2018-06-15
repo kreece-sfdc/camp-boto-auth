@@ -208,7 +208,9 @@ var force = (function () {
             obj = parseQueryString(queryString);
             oauth = obj;
             tokenStore.forceOAuth = JSON.stringify(oauth);
-            console.log(JSON.stringify(oauth));
+            console.log(JSON.stringify(oauth.instance_url));
+            console.log(JSON.stringify(oauth.refresh_token));
+            console.log(JSON.stringify(oauth.access_token));
             if (loginSuccessHandler) {
                 loginSuccessHandler();
             }
