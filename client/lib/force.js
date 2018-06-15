@@ -218,13 +218,14 @@ var force = (function () {
             }
         }
         else if (url.indexOf("code=") > 0) {
-            queryString = url.substr(url.indexOf('#') + 1);
+            queryString = url;//.substr(url.indexOf('#') + 1);
             obj = parseQueryString(queryString);
             oauth = obj;
             console.log(JSON.stringify(oauth.code));
+            tokenStore.authorization_code = oauth.code;
 
             var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code;
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + tokenStore.authorization_code;
 
             window.location = loginWindowURL;
 
