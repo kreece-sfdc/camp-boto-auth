@@ -200,7 +200,8 @@ var force = (function () {
     function oauthCallback(url) {
         // Parse the OAuth data received from Facebook
         var queryString,
-            obj;
+            obj,
+            authUrl;
 
         if (url.indexOf("code=") > 0) {
             queryString = url.substr(url.indexOf('?') + 1);
@@ -220,7 +221,7 @@ var force = (function () {
                 'client_id': appId
             },
 
-            var authUrl = loginURL + '/services/oauth2/token?' + toQueryString(params);
+            authUrl = loginURL + '/services/oauth2/token?' + toQueryString(params);
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
