@@ -203,7 +203,22 @@ var force = (function () {
         var queryString,
             obj;
 
-        if (url.indexOf("access_token=") > 0) {
+        if (url.indexOf("code=") > 0) {
+            queryString = url;//.substr(url.indexOf('#') + 1);
+            obj = parseQueryString(queryString);
+            oauth = obj;
+            alert(JSON.stringify(oauth));
+
+            var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
+            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth;
+
+            window.location = loginWindowURL;
+
+            if (loginSuccessHandler) {
+                loginSuccessHandler();
+            }
+        }
+        else if (url.indexOf("access_token=") > 0) {
             queryString = url.substr(url.indexOf('#') + 1);
             obj = parseQueryString(queryString);
             oauth = obj;
@@ -213,27 +228,12 @@ var force = (function () {
             console.log(JSON.stringify(oauth.access_token));
 
             window.location = oauth.instance_url;
-            
+
             if (loginSuccessHandler) {
                 loginSuccessHandler();
             }
         }
-        else if (url.indexOf("code=") > 0) {
-            queryString = url;//.substr(url.indexOf('#') + 1);
-            obj = parseQueryString(queryString);
-            oauth = obj;
-            console.log(JSON.stringify(oauth.code));
-            tokenStore.authorization_code = oauth.code;
-
-            var loginWindowURL = loginURL + '/services/oauth2/authorize?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + tokenStore.authorization_code;
-
-            window.location = loginWindowURL;
-
-            if (loginSuccessHandler) {
-                loginSuccessHandler();
-            }
-        } else if (url.indexOf("error=") > 0) {
+        else if (url.indexOf("error=") > 0) {
             queryString = decodeURIComponent(url.substring(url.indexOf('?') + 1));
             obj = parseQueryString(queryString);
             if (loginErrorHandler) {
