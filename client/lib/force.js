@@ -207,10 +207,48 @@ var force = (function () {
             obj = parseQueryString(queryString);
             oauth = obj;
 
-            var loginWindowURL = loginURL + '/services/oauth2/token?client_id=' + appId + '&redirect_uri=' +
-            oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code + '=='; // hack to re-add after parseQueryString stripped them out
+            //var loginWindowURL = loginURL + '/services/oauth2/token?client_id=' + appId + '&redirect_uri=' +
+            //oauthCallbackURL + '&grant_type=authorization_code&code=' + oauth.code + '=='; // hack to re-add after parseQueryString stripped them out
 
-            window.location = loginWindowURL;
+            //window.location = loginWindowURL;
+
+            var xhr = new XMLHttpRequest(),
+
+            params = {
+                'grant_type': 'authorization_code',
+                'code': oauth.code + '==',
+                'client_id': appId
+            },
+
+            url = oauthPlugin ? loginURL : proxyURL;
+
+            url = url + '/services/oauth2/token?' + toQueryString(params);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('Refresh Token Retrieved');
+                        var res = JSON.parse(xhr.responseText);
+                        oauth.refresh_token = JSON.stringify(res.refresh_token);
+                        tokenStore.refresh_token = oauth.refresh_token;
+                        alert(oauth.refresh_token);
+                        if (success) {
+                            success();
+                        }
+                    } else {
+                        console.log('Error while trying to refresh token: ' + xhr.responseText);
+                        if (error) {
+                            error();
+                        }
+                    }
+                }
+            };
+
+            xhr.open('POST', url, true);
+            if (!oauthPlugin) {
+                xhr.setRequestHeader("Target-URL", loginURL);
+            }
+            xhr.send();
 
             if (loginSuccessHandler) {
                 loginSuccessHandler();
